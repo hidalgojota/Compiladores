@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -20,29 +21,43 @@ public class Funciones {
     public Funciones() {
     }
     
-    public FileReader FR;
+    public File fichero;
+    boolean guardado = true;
     
     /**
      * @description     Save document of the text area.
      * @param area      GUI Object of the text area, for getting the text or document.
      */
     public void guardar_documento(JTextArea area){
-        
-         JFileChooser fileChooser = new JFileChooser();
-         int seleccion = fileChooser.showSaveDialog(area);
-         if (seleccion == JFileChooser.APPROVE_OPTION)
-         {
-             File fichero=fileChooser.getSelectedFile();
-             try{
-                 PrintWriter pw = new PrintWriter(fichero);
-                 pw.println(area.getText());
-                 pw.close();
-             }catch(Exception f)
-             {
-                 f.printStackTrace();
-             }
-         }
-     }
+        if(fichero!=null){
+            try{
+                    PrintWriter pw = new PrintWriter(fichero);
+                    pw.println(area.getText());
+                    pw.close();
+                }catch(Exception f)
+                {
+                    f.printStackTrace();
+                }
+        }
+        else{
+            this.guardado=true;
+            JFileChooser fileChooser = new JFileChooser();
+            int seleccion = fileChooser.showSaveDialog(area);
+            if (seleccion == JFileChooser.APPROVE_OPTION)
+            {
+                File Fichero=fileChooser.getSelectedFile();
+                try{
+                    PrintWriter pw = new PrintWriter(Fichero);
+                    pw.println(area.getText());
+                    pw.close();
+                }catch(Exception f)
+                {
+                    f.printStackTrace();
+                }
+            }
+        }
+    }
+    
     /**
      * @description     Allows to search and open a document in the text area.
      * @param           GUI Object of the text area, for showing the document.
@@ -53,10 +68,10 @@ public class Funciones {
             int seleccion = fileChooser.showOpenDialog(area);
             if (seleccion == JFileChooser.APPROVE_OPTION)
             {
-                File fichero = fileChooser.getSelectedFile();
+                /*File*/ fichero = fileChooser.getSelectedFile();
                 // y a trabajar con el fichero
                 try{
-                    FR=new FileReader(fichero);
+                    FileReader FR=new FileReader(fichero);
                     BufferedReader br = new BufferedReader(FR);
                     String linea;
                     String retorno_de_carro=System.getProperty("line.separator");
@@ -123,7 +138,7 @@ public class Funciones {
      */
     public void compilar(JTextArea comp){
         reconocedor_tokens rt = new reconocedor_tokens();
-        rt.escanear(FR);
-        //comp.setText("  I don't know what happened with this :S\n");
+        
+        comp.setText(rt.compilar(fichero));
     }
 }

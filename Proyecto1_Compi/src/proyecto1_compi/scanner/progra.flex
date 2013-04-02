@@ -1,20 +1,15 @@
-import java_cup.runtime.*;
 /**
- * Scanner para la gramï¿½tica de prueba del curso de Compiladores e Intï¿½rpretes.
+ * Scanner para la gramática de prueba del curso de Compiladores e Intérpretes.
  */
 %%
 
-
-
-
 %class Scanner
 %unicode
-%cup
-//%debug
+//%cup
 %line
 %column
-//%type Symbol
-//%function nextToken
+%type Symbol
+%function nextToken
 
 %eofval{
  return symbol(sym.EOF);
@@ -124,7 +119,7 @@ DecIntegerLiteral = 0 | [1-9][0-9]*
 
 
 
-  /* otros simbolos vï¿½lidos */
+  /* otros simbolos válidos */
   "("                            { return symbol(sym.PARENi); }
   ")"                           { return symbol(sym.PARENd); }
   ";"                            { return symbol(sym.PyCOMA); }
@@ -160,7 +155,7 @@ DecIntegerLiteral = 0 | [1-9][0-9]*
   \\                             { string.append('\\'); }
 }
 
-/* caracteres no vï¿½lidos */
-.|\n                             { System.out.println("Error caracter invï¿½lido: <" + yytext() + "> en fila: " + yyline + " columna: " + yycolumn );
+/* caracteres no válidos */
+.|\n                             { System.out.println("Error caracter inválido: <" + yytext() + "> en fila: " + yyline + " columna: " + yycolumn );
        /*throw new Error("Caracter no permitido <"+
                                                     yytext()+">");*/ }

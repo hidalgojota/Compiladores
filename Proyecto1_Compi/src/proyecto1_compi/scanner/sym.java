@@ -1,7 +1,7 @@
 package proyecto1_compi.scanner;
 
 public class sym {
-    
+    /* terminals */
  public static final int PARENd = 3;
  public static final int PARENi = 2;
  public static final int ID = 4;
