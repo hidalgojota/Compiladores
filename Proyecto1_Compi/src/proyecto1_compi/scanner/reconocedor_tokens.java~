@@ -1,0 +1,35 @@
+package proyecto1_compi.scanner;
+
+import java.io.FileReader;
+import java.io.IOException;
+import javax.naming.spi.DirStateFactory.Result;
+
+public class reconocedor_tokens{
+ 
+ public static String escanear(){
+     String result = "";
+      try{
+           Scanner s = new Scanner(new FileReader("prueba.txt"));
+           Symbol res;
+       do{
+          res= s.nextToken();
+          result = result + res.sym + "\n";
+          System.out.println(res.sym);
+          
+    /*    if (res.sym != sym.EOF)
+          System.out.println(res.value.toString()); // esto mandara el lexema de cada token
+          */
+       }
+       while(res.sym != sym.EOF);
+      }
+      catch(IOException e){
+          System.out.println("No está haciendo el try");
+      }
+      return result;
+ }
+ 
+ public static void main (String args[]){
+     escanear();
+ }
+ 
+}
