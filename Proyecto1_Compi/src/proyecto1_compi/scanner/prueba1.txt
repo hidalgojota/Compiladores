@@ -9,4 +9,5 @@ tira = "Esto es una prueba";
 //int tira2;
 /*  /* sdfgsdfsdf */
 x = 5.654 + 4 * x;
-fdañmfcl{SMC{AMFWÑFMWP@@@@
+fdaï¿½mfcl{SMC{AMFWï¿½FMWP@@@@
+
