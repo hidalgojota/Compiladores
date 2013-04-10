@@ -1,0 +1,430 @@
+import java_cup.runtime.*;
+
+parser code {:
+ 
+ Scanner scanner;
+ 
+ public parser(java.io.Reader input){
+ scanner = new Scanner(input);
+ }
+
+ public String errores(int sys)
+ {
+   if (sys == 2)
+     return("PARENd");
+   else if (sys == 3)
+     return("PARENi");
+   else if (sys == 4)
+     return("ID");
+   else if (sys == 5)
+     return("PyCOMA");
+   else if (sys == 6)
+     return("PUNTO");
+   else if (sys == 7)
+     return("CLASS");
+   else if (sys == 8)
+     return("LLAVEi");
+   else if (sys == 9)
+     return("LLAVEd");
+   else if (sys == 10)
+     return("STATIC");
+   else if (sys == 11)
+     return("PUBLIC");
+   else if (sys == 12)
+     return("VOID");
+   else if (sys == 13)
+     return("MAIN");
+   else if (sys == 14)
+     return("TSTRING");
+   else if (sys == 15)
+     return("STRING");
+   else if (sys == 16)
+     return("CORCHi");
+   else if (sys == 17)
+     return("CORCHd");
+   else if (sys == 18)
+     return("IF");
+   else if (sys == 19)
+     return("WHILE");
+   else if (sys == 20)
+     return("ELSE");
+   else if (sys == 21)
+     return("SYSTEM");
+   else if (sys == 22)
+     return("OUT");
+   else if (sys == 23)
+     return("PRINTln");
+   else if (sys == 24)
+     return("EXIT");
+   else if (sys == 25)
+     return("TINT");
+   else if (sys == 26)
+     return("INT");
+   else if (sys == 27)
+     return("ASIGN");
+   else if (sys == 28)
+     return("READ");
+   else if (sys == 29)
+     return("THIS");
+   else if (sys == 30)
+     return("LENGTH");
+   else if (sys == 31)
+     return("TRUE");
+   else if (sys == 32)
+     return("FALSE");
+   else if (sys == 33)
+     return("NEW");
+   else if (sys == 34)
+     return("NEG");
+   else if (sys == 35)
+     return("DIV");
+   else if (sys == 36)
+     return("IGIG");
+   else if (sys == 37)
+     return("DIF");
+   else if (sys == 38)
+     return("MAYIG");
+   else if (sys == 39)
+     return("MENIG");
+   else if (sys == 40)
+     return("MAY");
+   else if (sys == 41)
+     return("MEN");
+   else if (sys == 42)
+     return("OR");
+   else if (sys == 43)
+     return("AND");
+   else if (sys == 44)
+     return("SUMA");
+    else if (sys == 45)
+      return("MULT");
+    else if (sys == 46)
+      return("RESTA");
+    else if (sys == 47)
+      return("EXTENDS");
+    else if (sys == 48)
+      return("IMPLEMENTS");
+    else if (sys == 49)
+      return("BOOL");
+    else if (sys == 50)
+      return("RETURN");
+    else if (sys == 51)
+      return("IMPORT");
+    else if (sys == 52)
+      return("IN");
+    else if (sys == 53)
+      return("COMA"); 
+    else 
+      return("error");
+ }
+
+ public void syntax_error(Symbol cur_token2)
+ {
+  if (cur_token.sym == 2)
+   report_error("Se esperaba un Parentesis Izquierdo", cur_token2);
+  else if (cur_token.sym == 3)
+   report_error("Se esperaba un Parentesis Derecho", cur_token2);
+  else if (cur_token.sym == 4)
+   report_error("Se esperaba un ID", cur_token2);
+  else if (cur_token.sym == 5)
+   report_error("Se esperaba un punto y coma", cur_token2);
+  else if (cur_token.sym == 6)
+   report_error("Se esperaba un punto", cur_token2);
+  else if (cur_token.sym == 7)
+   report_error("Se esperaba una Clase", cur_token2);
+  else if (cur_token.sym == 8)
+   report_error("Se esperaba llave Izquierda", cur_token2);
+  else if (cur_token.sym == 9)
+   report_error("Se esperaba una llave Derecha", cur_token2);
+  else if (cur_token.sym == 10)
+   report_error("Se esperaba un Static", cur_token2);
+  else if (cur_token.sym == 11)
+   report_error("Se esperaba un Public", cur_token2);
+  else if (cur_token.sym == 12)
+   report_error("Se esperaba un Void", cur_token2);
+  else if (cur_token.sym == 13)
+   report_error("Se esparaba un Main", cur_token2);
+  else if (cur_token.sym == 14)
+   report_error("Se esperaba un Tstring", cur_token2);
+  else if (cur_token.sym == 15)
+   report_error("Se esperaba un String", cur_token2);
+  else if (cur_token.sym == 16)
+   report_error("Se esperaba un Corchete Izquierdo", cur_token2);
+  else if (cur_token.sym == 17)
+   report_error("Se esperaba un Corchete Derecho", cur_token2);
+  else if (cur_token.sym == 18)
+   report_error("Se esperaba un IF", cur_token2);
+  else if (cur_token.sym == 19)
+   report_error("Se esperaba un While", cur_token2);
+  else if (cur_token.sym == 20)
+   report_error("Se esperaba un Else", cur_token2);
+  else if (cur_token.sym == 21)
+   report_error("Se esperaba un System", cur_token2);
+  else if (cur_token.sym == 22)
+   report_error("Se esperaba un OUT", cur_token2);
+  else if (cur_token.sym == 23)
+   report_error("Se esparaba un Println", cur_token2);
+  else if (cur_token.sym == 24)
+   report_error("Se esperaba un Exit", cur_token2);
+  else if (cur_token.sym == 25)
+   report_error("Se esperaba un Tint", cur_token2);
+  else if (cur_token.sym == 26)
+   report_error("Se esperaba un Int", cur_token2);
+  else if (cur_token.sym == 27)
+   report_error("Se esperaba una Asing", cur_token2);
+  else if (cur_token.sym == 28)
+   report_error("Se esperaba un Read", cur_token2);
+  else if (cur_token.sym == 29)
+   report_error("Se esperaba un This", cur_token2);
+  else if (cur_token.sym == 30)
+   report_error("Se esperaba un Length", cur_token2);
+  else if (cur_token.sym == 31)
+   report_error("Se esperaba un True", cur_token2);
+  else if (cur_token.sym == 32)
+   report_error("Se esperaba un False", cur_token2);
+  else if (cur_token.sym == 33)
+   report_error("Se esparaba un Main", cur_token2);
+    else if (cur_token.sym == 34)
+   report_error("Se esperaba un New", cur_token2);
+  else if (cur_token.sym == 35)
+   report_error("Se esperaba un Negador", cur_token2);
+  else if (cur_token.sym == 36)
+   report_error("Se esperaba un IgualIgual", cur_token2);
+  else if (cur_token.sym == 37)
+   report_error("Se esperaba un Diferente", cur_token2);
+  else if (cur_token.sym == 38)
+   report_error("Se esperaba un Mayor Igual", cur_token2);
+  else if (cur_token.sym == 39)
+   report_error("Se esperaba un Menor Igual", cur_token2);
+  else if (cur_token.sym == 40)
+   report_error("Se esperaba un Mayor", cur_token2);
+  else if (cur_token.sym == 41)
+   report_error("Se esperaba un Menor", cur_token2);
+  else if (cur_token.sym == 42)
+   report_error("Se esperaba un OR", cur_token2);
+  else if (cur_token.sym == 43)
+   report_error("Se esparaba un AND", cur_token2);
+  else if (cur_token.sym == 44)
+   report_error("Se esperaba una Suma", cur_token2);
+  else if (cur_token.sym == 45)
+   report_error("Se esperaba una Multiplicacion", cur_token2);
+  else if (cur_token.sym == 46)
+   report_error("Se esperaba una Resta", cur_token2);
+  else if (cur_token.sym == 47)
+   report_error("Se esperaba un extends", cur_token2);
+  else if (cur_token.sym == 48)
+   report_error("Se esperaba un implements", cur_token2);
+  else if (cur_token.sym == 49)
+   report_error("Se esperaba un bool", cur_token2);
+  else if (cur_token.sym == 50)
+   report_error("Se esperaba un return", cur_token2);
+  else if (cur_token.sym == 51)
+   report_error("Se esperaba un Import", cur_token2);
+  else if (cur_token.sym == 52)
+   report_error("Se esperaba un in", cur_token2);
+  else if (cur_token.sym == 53)
+   report_error("Se esparaba una coma", cur_token2);
+  else 
+   report_error("Error: ", cur_token2);
+ }
+
+ public void report_error(String message, Object info) {
+    StringBuffer m = new StringBuffer("Error ");
+ 
+    if (info instanceof java_cup.runtime.Symbol) {
+      m.append( "(" + errores(cur_token.sym) +")" );
+      m.append(" en fila "+ cur_token.left + " columna " + cur_token.right );
+      
+      if (((java_cup.runtime.Symbol)info).value != null)
+        m.append(". Lexema: " + cur_token.value.toString());
+      
+    }
+    m.append(" : "+message);
+    m.append(" y en su lugar viene " + ((java_cup.runtime.Symbol)info).value.toString());
+
+    System.out.println(m);
+ }
+
+   
+ public void report_fatal_error(String message, Object info)  {
+  report_error(message, info);
+  throw new RuntimeException("Error Fatal de Sintaxis!!!");
+   }
+
+:}
+
+terminal PARENd, PARENi, ID, PyCOMA, PUNTO, CLASS, LLAVEi, LLAVEd, STATIC, PUBLIC, VOID, MAIN, TSTRING, STRING, CORCHi, CORCHd, IF, WHILE, ELSE, SYSTEM, OUT;
+terminal  PRINTln, EXIT, TINT, INT, ASIGN, READ, THIS, LENGTH, TRUE, FALSE, NEW, NEG, DIV, IGIG, DIF, MAYIG, MENIG, MAY, MEN, OR, AND, SUMA, MULT, RESTA;
+terminal  EXTENDS, IMPLEMENTS, BOOL, RETURN, IMPORT, IN, COMA;
+
+non terminal program, typeName, mainClass , varDecl , constrDecl;
+
+non terminal varsImportDecl, varsImportDecls2;
+non terminal varsClassDecl, varsClassDecl2;
+non terminal importDecl, puntoMult;
+non terminal classDecl, classDecl2, classDecl3;
+non terminal bodyDecl, bodyDecl2;
+non terminal varsVarDecl, varsVarDecl2;
+non terminal varsStatement, varsStatement2;
+non terminal methodDecl, typeVoid, returnExp;
+non terminal formalList, formalList2;
+non terminal statement, elseStatement, corchExp, systemInRead, thisID;
+non terminal exp, exp2;
+non terminal exp_simpl, expList, exp_expList;
+
+non terminal type, exp_Simpl, op;
+
+precedence right CLASS, ID;
+precedence right MULT;
+precedence right SUMA;
+precedence right RESTA;
+precedence right AND;
+precedence right MEN;
+precedence right OR;
+precedence right MAY;
+precedence right MAYIG;
+precedence right MENIG;
+precedence right DIV;
+precedence right IGIG;
+precedence right DIF;
+precedence right PUNTO;
+precedence right CORCHi;
+
+
+
+start with program;
+
+// Regla 1) Símbolo inicial de la gramática
+  program ::=  varsImportDecl varsClassDecl mainClass;
+
+// Regla 2) varias Import declaration
+  varsImportDecl ::= varsImportDecls2 | ;
+
+//*Regla 2.1
+  varsImportDecls2 ::= importDecl | varsImportDecls2 importDecl;
+  
+  
+// Regla 3) varias class declaration
+  varsClassDecl ::= varsClassDecl2 | ;
+  
+//*Regla 3.1
+  varsClassDecl2 ::= classDecl | varsClassDecl2 classDecl;
+
+// Regla 4) import declarations
+  importDecl  ::= IMPORT typeName puntoMult PyCOMA
+    ;
+//*Regla 4.1) 
+  puntoMult ::= PUNTO MULT | ;
+
+// Regla 5) type name
+  typeName ::= ID 
+    | typeName PUNTO ID ;
+  
+// Regla 6) main class
+  mainClass ::= CLASS ID LLAVEi PUBLIC STATIC  VOID  MAIN PARENi STRING CORCHi CORCHd ID PARENd  LLAVEi statement LLAVEd LLAVEd ;
+  
+// Regla 7) class declaration
+  classDecl ::= CLASS ID  classDecl2 LLAVEi  bodyDecl LLAVEd;
+  
+//*Regla 7.1
+  classDecl2 ::= classDecl3 ID | ;
+//*Regla7.2
+  classDecl3 ::= EXTENDS | IMPLEMENTS ;
+
+//Regla 8) body declaration
+  bodyDecl ::= bodyDecl bodyDecl2 | ;
+//*Regla 8.1
+  bodyDecl2 ::= varDecl | constrDecl | methodDecl | classDecl ;
+
+// Regla 9) declaraciones de variables
+  varDecl ::= type ID PyCOMA  ;
+
+//Regla 10)  construct declarations
+  constrDecl  ::= PUBLIC  ID PARENi formalList PARENd LLAVEi varsVarDecl varsStatement LLAVEd;
+
+// Regla 11) varias declaraciones de variable
+  varsVarDecl ::=  varsVarDecl2 | ;
+
+//*Regla 11.1
+  varsVarDecl2 ::= varDecl | varsVarDecl2 varDecl;
+  
+//Regla 12) varios statement
+  varsStatement ::=  varsStatement2 | ;
+
+//*Regla 12.1
+  varsStatement2 ::= statement | varsStatement2 statement ;
+
+// Regla 13) varias method declarations
+  methodDecl ::=  PUBLIC typeVoid ID PARENi formalList PARENd
+    LLAVEi varsVarDecl varsStatement returnExp LLAVEd ;
+
+//*Regla 13.1
+  typeVoid ::= type | VOID;
+  
+//*Regla 13.2
+  returnExp ::= RETURN exp PyCOMA  | ;
+
+//Regla 14) lista de declaracion de variables
+  formalList ::=  formalList2 | ;
+//*Regla 14.1
+  formalList2 ::= type ID 
+    | formalList  COMA type ID ;
+  
+//Regla 15) tipo de variables
+  type ::= TINT CORCHi CORCHd
+    | BOOL
+    | TINT
+    | ID ;
+
+// Regla 16) statement
+  statement ::= LLAVEi varsStatement LLAVEd
+    | IF PARENi exp PARENd statement elseStatement
+    | WHILE  PARENi exp PARENd statement
+    | SYSTEM PUNTO OUT PUNTO PRINTln PARENi exp PARENd PyCOMA
+    | SYSTEM PUNTO EXIT PARENi INT PARENd PyCOMA
+    | ID corchExp ASIGN systemInRead PyCOMA
+    | thisID PUNTO ID PARENi expList PARENd ;
+
+//*Regla 16.1
+  elseStatement ::= ELSE statement  | ;
+	
+//*Regla 16.2
+  corchExp ::= CORCHi exp CORCHd  | ;
+//*Regla 16.3
+  systemInRead ::=  exp | PARENi type PARENd SYSTEM PUNTO IN PUNTO READ PARENi PARENd ;
+
+//*Regla 16.4
+  thisID ::= THIS | ID ;
+  
+// Regla 17) expression
+  exp ::= exp_simpl
+    | exp exp2 ;
+  
+//*Regla 17.1
+  exp2 ::=  op exp2
+    | CORCHi exp CORCHd 
+    | PUNTO LENGTH
+    | PUNTO ID PARENi expList PARENd ;
+
+// Regla 18) simple expression
+  exp_simpl ::= INT
+    | TRUE
+    | FALSE
+    | ID
+    | THIS
+    | NEW INT CORCHi exp CORCHd
+    | NEW ID PARENi expList PARENd
+    | NEG exp
+    | PARENi exp PARENd
+    | STRING ;
+
+// Regla 19) list expression
+  expList ::= exp_expList | ;
+
+//*Regla 19.1
+  exp_expList ::=  exp 
+    | expList COMA exp ;
+  
+// Regla 20) operadores
+  op ::= SUMA | RESTA | MULT | DIV | DIF | IGIG | MEN | MENIG | MAY | MAYIG | OR | AND;
+

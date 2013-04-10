@@ -10,11 +10,10 @@ public class reconocedor_tokens{
          Symbol res;
          do{
              res= s.nextToken();
-             result = result+res.sym+ "---  Line: " + res.left + "---  Row: "+ res.right + "\n";
-             
-             //        System.out.println(res.sym);
-             //if (res.sym != sym.EOF)
-             //  System.out.println(res.value.toString()); // esto mandara el lexema de cada token
+             result = result+res.sym;
+             if (res.sym != sym.EOF)
+              result = result + "   '\'"+res.value.toString()+"'\'"; // esto mandara el lexema de cada token
+             result = result+ "            Line: " + res.left + "            Row: "+ res.right + "\n";
          }while(res.sym != sym.EOF);
      }
      catch(IOException e){
