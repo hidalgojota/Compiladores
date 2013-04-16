@@ -1,11 +1,11 @@
 /**
- * Scanner para la gramática de prueba del curso de Compiladores e Intérpretes.
+ * Scanner para la gramï¿½tica de prueba del curso de Compiladores e Intï¿½rpretes.
  */
 %%
 
 %class Scanner
 %unicode
-//%cup
+%cup
 %line
 %column
 %type Symbol
@@ -120,7 +120,7 @@ DecIntegerLiteral = 0 | [1-9][0-9]*
 
 
 
-  /* otros simbolos válidos */
+  /* otros simbolos vï¿½lidos */
   "("                            { return symbol(sym.PARENi,yytext()); }
   ")"                           { return symbol(sym.PARENd,yytext()); }
   ";"                            { return symbol(sym.PyCOMA,yytext()); }
@@ -156,7 +156,7 @@ DecIntegerLiteral = 0 | [1-9][0-9]*
   \\                             { string.append('\\'); }
 }
 
-/* caracteres no válidos */
-.|\n                             { System.out.println("Error caracter inválido: <" + yytext() + "> en fila: " + yyline + " columna: " + yycolumn );
-       /*throw new Error("Caracter no permitido <"+
-                                                    yytext()+">");*/ }
+/* caracteres no vï¿½lidos */
+.|\n       { System.out.println("Error caracter invï¿½lido: <" + yytext() + "> en fila: " + yyline + " columna: " + yycolumn );
+       throw new Error("Caracter no permitido <"+  yytext()+">");
+   }

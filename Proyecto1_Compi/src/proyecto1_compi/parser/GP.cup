@@ -259,12 +259,12 @@ terminal  EXTENDS, IMPLEMENTS, BOOL, RETURN, IMPORT, IN, COMA;
 
 non terminal program, typeName, mainClass , varDecl , constrDecl;
 
-non terminal varsImportDecl, varsImportDecls2;
-non terminal varsClassDecl, varsClassDecl2;
+non terminal varsImportDecl; //varsImportDecls2;
+non terminal /*varsClassDecl,*/ varsClassDecl2;
 non terminal importDecl, puntoMult;
-non terminal classDecl, classDecl2, classDecl3;
+non terminal classDecl, classDecl2; //classDecl3;
 non terminal bodyDecl, bodyDecl2;
-non terminal varsVarDecl, varsVarDecl2;
+non terminal varsVarDecl; //varsVarDecl2;
 non terminal varsStatement, varsStatement2;
 non terminal methodDecl, typeVoid, returnExp;
 non terminal formalList, formalList2;
@@ -272,40 +272,43 @@ non terminal statement, elseStatement, corchExp, systemInRead, thisID;
 non terminal exp, exp2;
 non terminal exp_simpl, expList, exp_expList;
 
-non terminal type, exp_Simpl, op;
+non terminal type, op;
 
-precedence right CLASS, ID;
-precedence right MULT;
-precedence right SUMA;
-precedence right RESTA;
-precedence right AND;
-precedence right MEN;
-precedence right OR;
-precedence right MAY;
-precedence right MAYIG;
-precedence right MENIG;
-precedence right DIV;
-precedence right IGIG;
-precedence right DIF;
-precedence right PUNTO;
-precedence right CORCHi;
-
+precedence left CLASS, ID;
+precedence left MULT;
+precedence left SUMA;
+precedence left RESTA;
+precedence left AND;
+precedence left MEN;
+precedence left OR;
+precedence left PARENd;
+precedence left MAY;
+precedence left MAYIG;
+precedence left MENIG;
+precedence left DIV;
+precedence left IGIG;
+precedence left DIF;
+precedence left PUNTO;
+precedence left CORCHi;
+precedence left ELSE;
+precedence left LLAVEi;
 
 
 start with program;
 
 // Regla 1) Símbolo inicial de la gramática
-  program ::=  varsImportDecl varsClassDecl mainClass;
+  program ::=  varsImportDecl varsClassDecl2 mainClass
+				|varsImportDecl mainClass;
 
 // Regla 2) varias Import declaration
-  varsImportDecl ::= varsImportDecls2 | ;
+  //varsImportDecl ::= varsImportDecls2 | ;
 
 //*Regla 2.1
-  varsImportDecls2 ::= importDecl | varsImportDecls2 importDecl;
+  varsImportDecl ::= | varsImportDecl importDecl;
   
   
 // Regla 3) varias class declaration
-  varsClassDecl ::= varsClassDecl2 | ;
+  //varsClassDecl ::= varsClassDecl2 | ;
   
 //*Regla 3.1
   varsClassDecl2 ::= classDecl | varsClassDecl2 classDecl;
@@ -321,15 +324,16 @@ start with program;
     | typeName PUNTO ID ;
   
 // Regla 6) main class
-  mainClass ::= CLASS ID LLAVEi PUBLIC STATIC  VOID  MAIN PARENi STRING CORCHi CORCHd ID PARENd  LLAVEi statement LLAVEd LLAVEd ;
+  mainClass ::= CLASS ID LLAVEi PUBLIC STATIC  VOID  MAIN PARENi TSTRING CORCHi CORCHd ID PARENd  LLAVEi statement LLAVEd LLAVEd ;
   
 // Regla 7) class declaration
   classDecl ::= CLASS ID  classDecl2 LLAVEi  bodyDecl LLAVEd;
   
 //*Regla 7.1
-  classDecl2 ::= classDecl3 ID | ;
+  classDecl2 ::= EXTENDS ID 
+			|	IMPLEMENTS ID | ;
 //*Regla7.2
-  classDecl3 ::= EXTENDS | IMPLEMENTS ;
+ // classDecl3 ::= EXTENDS | IMPLEMENTS ;
 
 //Regla 8) body declaration
   bodyDecl ::= bodyDecl bodyDecl2 | ;
@@ -343,10 +347,10 @@ start with program;
   constrDecl  ::= PUBLIC  ID PARENi formalList PARENd LLAVEi varsVarDecl varsStatement LLAVEd;
 
 // Regla 11) varias declaraciones de variable
-  varsVarDecl ::=  varsVarDecl2 | ;
+ // varsVarDecl ::=  /* epsilon */ | varsVarDecl2;
 
 //*Regla 11.1
-  varsVarDecl2 ::= varDecl | varsVarDecl2 varDecl;
+  varsVarDecl ::= | varsVarDecl varDecl;
   
 //Regla 12) varios statement
   varsStatement ::=  varsStatement2 | ;
@@ -374,7 +378,7 @@ start with program;
   type ::= TINT CORCHi CORCHd
     | BOOL
     | TINT
-    | ID ;
+    | ID;
 
 // Regla 16) statement
   statement ::= LLAVEi varsStatement LLAVEd
@@ -410,7 +414,7 @@ start with program;
   exp_simpl ::= INT
     | TRUE
     | FALSE
-    | ID
+    | type
     | THIS
     | NEW INT CORCHi exp CORCHd
     | NEW ID PARENi expList PARENd
